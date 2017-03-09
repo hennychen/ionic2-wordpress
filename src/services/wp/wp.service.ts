@@ -70,7 +70,7 @@ export class WpService {
 
     getPosts(paramsObj) {
         let params = this.util.transformRequest(paramsObj);
-        return this.http.get(this.wpApiURL + '/deal?_embed&' + params)
+        return this.http.get(this.wpApiURL + '/posts?' + params)
             .map(res => res.json());
     }
 

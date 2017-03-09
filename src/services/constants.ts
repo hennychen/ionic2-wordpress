@@ -1,1 +1,1 @@
-export const SITE_URL:string = "http://sumsy.com";
+export const SITE_URL:string = "http://localhost/wordpress";
