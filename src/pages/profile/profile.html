@@ -11,7 +11,7 @@
 <ion-content padding>
   <div *ngIf="!auth.authenticated()">
     <login-form></login-form>
-    <!--<signup-form></signup-form>-->
+    <!-- <signup-form></signup-form> -->
     <p>Don't have an account yet? please go to <a href="http://sumsy.com/wp-login.php?action=register" target="_blank">Sumsy.com</a> to register.</p>
   </div>
 
@@ -25,7 +25,7 @@
     </ion-item>
   
   </ion-card>
-
+<div><signup-form></signup-form></div>
   <button ion-button block (click)="logout()">Logout</button>
   </div>  
   
