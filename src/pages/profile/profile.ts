@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 
 import { AuthService, WpService } from '../../services/index';
 
+import { NavController } from 'ionic-angular';
+
+import { SignupPagePage } from '../signup-page/signup-page';
+
 @Component({
     templateUrl: './profile.html',
 })
@@ -10,7 +14,8 @@ export class ProfilePage {
 
     constructor(
         private auth: AuthService,
-        private wp: WpService) {
+        private wp: WpService,
+        public navCtrl:NavController) {
             console.log(this.auth.user);
     }
 
@@ -37,6 +42,10 @@ export class ProfilePage {
 
     logout() {
         this.auth.logout();
+    }
+    register(){
+      console.log('register()');
+      this.navCtrl.push(SignupPagePage);
     }
 
 }

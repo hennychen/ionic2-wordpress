@@ -51,6 +51,7 @@ export class Home {
         this.hideSearch = !this.hideSearch;
         this.hidePostList = !this.hideSearch;
     }
+    // 搜索关键字
     searchItem(ev:any){
         // set val to the value of the searchbar
         let val = ev.target.value;
@@ -99,7 +100,7 @@ export class Home {
     ionViewDidEnter() {
 
     }
-
+    //点击跳转到详情
     postTapped(event, post) {
         this.nav.push(PostDetail, {
             post: post

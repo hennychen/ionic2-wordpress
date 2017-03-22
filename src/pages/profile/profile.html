@@ -12,7 +12,7 @@
   <div *ngIf="!auth.authenticated()">
     <login-form></login-form>
     <!-- <signup-form></signup-form> -->
-    <p>Don't have an account yet? please go to <a href="http://sumsy.com/wp-login.php?action=register" target="_blank">Sumsy.com</a> to register.</p>
+    <div>Don't have an account yet? please go to <a href="http://sumsy.com/wp-login.php?action=register" target="_blank">Sumsy.com</a> to <a (click)="register()">register</a>.</div>
   </div>
 
   <div *ngIf="auth.authenticated()">
@@ -23,9 +23,10 @@
       <h2>{{ auth.user.user_display_name }}</h2>
       <p>{{ auth.user.user_email }}</p>
     </ion-item>
-  
-  </ion-card>
 
-  </div>  
-  
+  </ion-card>
+  <!-- 退出登录 -->
+  <button ion-button block (click)="logout()">Logout</button>
+  </div>
+
 </ion-content>
