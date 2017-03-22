@@ -10,7 +10,7 @@
 
  <div *ngIf="selectedPost" class="selection">
    <div style="height: 200px; text-align: center">
-    <img style="max-height: 100%" *ngIf="selectedPost.featured_image_src_full" [src]="selectedPost.featured_image_src_full" class="featured-image" />
+    <img style="max-height: 100%" *ngIf="selectedPost.better_featured_image && selectedPost.better_featured_image.source_url" [src]="selectedPost.better_featured_image.source_url" class="featured-image" />
    </div>
     <h2 [innerHTML]="selectedPost.title.rendered"></h2>
     <div [innerHTML]="selectedPost.content.rendered"></div>

@@ -3,18 +3,57 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+    <ion-buttons end>
+      <button ion-button (click)="toggleSearch()"><ion-icon name="search"></ion-icon></button>
+      <button ion-button (click)="openSettings()"><ion-icon name="settings"></ion-icon></button>
+    </ion-buttons>
     <ion-title>Home page</ion-title>
   </ion-navbar>
+
+  <ion-toolbar [hidden]="hideSearch">
+    <ion-searchbar (ionInput)="searchItem($event)" ></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+<ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
 
-  <ion-list class="postList">
+  <ion-list [hidden]="hideSearch"  class="searchPosts">
+    <div  ion-item *ngFor="let post of searchPosts">
+    <ion-thumbnail item-left>
+
+        <img *ngIf="post.better_featured_image && post.better_featured_image.media_details.sizes.thumbnail.source_url" [src]="post.better_featured_image.media_details.sizes.thumbnail.source_url">
+
+        <img *ngIf="!(post.better_featured_image && post.better_featured_image.media_details.sizes.thumbnail.source_url) && post.better_featured_image
+  " [src]="post.better_featured_image">
+
+    </ion-thumbnail>
+    <h2 [innerHTML]="post.title.rendered" (click)="postTapped($event, post)"></h2>
+    <p *ngIf="post._embedded && post._embedded['wp:term']" style="margin-top: 0.6em">
+        <span *ngFor="let termList of post._embedded['wp:term']">
+            <li *ngFor="let term of termList" [innerHTML]="term.name" (click)="storeTapped($event, term)">
+            </li>
+        </span>
+    </p>
+    </div>
+
+  </ion-list>
+  <ion-list [hidden]='hidePostList' class="postList">
     <div  ion-item *ngFor="let post of posts">
     <ion-thumbnail item-left>
-        <img *ngIf="post.better_featured_image && post.better_featured_image['source_url']" [src]="post.better_featured_image['source_url']">
-        <img *ngIf="!(post.better_featured_image && post.better_featured_image['source_url']) && post.better_featured_image
+
+        <img *ngIf="post.better_featured_image && post.better_featured_image.media_details.sizes.thumbnail.source_url" [src]="post.better_featured_image.media_details.sizes.thumbnail.source_url">
+
+        <img *ngIf="!(post.better_featured_image && post.better_featured_image.media_details.sizes.thumbnail.source_url) && post.better_featured_image
 " [src]="post.better_featured_image">
+
     </ion-thumbnail>
     <h2 [innerHTML]="post.title.rendered" (click)="postTapped($event, post)"></h2>
     <p *ngIf="post._embedded && post._embedded['wp:term']" style="margin-top: 0.6em">
