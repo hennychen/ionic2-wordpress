@@ -15,6 +15,9 @@ import { CommentFormComponent } from '../components/commentForm/commentForm.comp
 import { SignupFormComponent } from '../components/signupForm/signupForm.component';
 import { SettingPagePage } from '../pages/setting-page/setting-page';
 import { CategoryPage } from '../pages/category/category';
+import { WppagePage } from '../pages/wppage/wppage';
+import { WppagedetailPage } from '../pages/wppagedetail/wppagedetail';
+import { HtmlPipe } from '../pipes/htmlPipe';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -35,7 +38,10 @@ export function getAuthHttp(http) {
     CommentFormComponent,
     SignupFormComponent,
     SettingPagePage,
-    CategoryPage
+    CategoryPage,
+    WppagePage,
+    WppagedetailPage,
+    HtmlPipe
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -48,7 +54,9 @@ export function getAuthHttp(http) {
     StoresPosts,
     ProfilePage,
     SettingPagePage,
-    CategoryPage
+    CategoryPage,
+    WppagePage,
+    WppagedetailPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

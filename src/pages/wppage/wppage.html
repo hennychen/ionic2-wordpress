@@ -1,5 +1,5 @@
 <!--
-  Generated template for the Category page.
+  Generated template for the Wppage page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
@@ -10,17 +10,17 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Category</ion-title>
+    <ion-title>wppage</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-spinner name="bubbles" *ngIf="isLoading"></ion-spinner>
   <ion-list>
-      <ion-item *ngFor="let category of list" (click)="openCategory(category)">
-        <h2>{{category.name}}</h2>
-        <ion-badge item-right primary>{{category.count}}</ion-badge>
-      </ion-item>
+        <a ion-item *ngFor="let page of pages" (click)="openPage(page)">
+            {{page.title.rendered}}
+        </a>
     </ion-list>
 </ion-content>
