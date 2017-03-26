@@ -4,15 +4,20 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Profile</ion-title>
+    <ion-buttons end>
+      <button (click)="register()" ion-button icon-only>
+        <ion-icon [name]="iconname" ></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
   <div *ngIf="!auth.authenticated()">
-    <login-form></login-form>
-    <!-- <signup-form></signup-form> -->
-    <div>Don't have an account yet? please go to <a href="http://sumsy.com/wp-login.php?action=register" target="_blank">Sumsy.com</a> to <a (click)="register()">register</a>.</div>
+    <login-form [hidden]="!hideSignUpView"></login-form>
+    <signup-form [hidden]="hideSignUpView" ></signup-form>
+    <div>Don't have an account yet? please go to <a href="http://sumsy.com/wp-login.php?action=register" target="_blank">Sumsy.com</a> to <a (click)="register()">{{registerString}}</a>.</div>
   </div>
 
   <div *ngIf="auth.authenticated()">

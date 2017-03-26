@@ -1,0 +1,23 @@
+<!--
+  Generated template for the Category page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Category</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+      <ion-item *ngFor="let category of list" (click)="openCategory(category)">
+        <h2>{{category.name}}</h2>
+        <ion-badge item-right primary>{{category.count}}</ion-badge>
+      </ion-item>
+    </ion-list>
+</ion-content>

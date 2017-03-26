@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController } from 'ionic-angular';
+import { NavController ,NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { PostDetail } from '../postDetail/post-detail.component';
 import { StoresPosts } from '../storesPosts/stores-posts.component';
@@ -19,11 +19,13 @@ export class Home {
 
     public hidePostList:Boolean = false;//搜索列表是否显示
     searchPosts:any;//搜索结果
+    category:any = {};
     // 查询参数
     params = {
     };
 
     constructor(
+        public navparams:NavParams,
         public navCtrl: NavController,
         private http: Http,
         private nav:NavController,
@@ -31,6 +33,12 @@ export class Home {
     ) {
             this.params['page'] = 1;
             this.isLoading = true;
+
+            this.category = this.navparams.get('category');
+            console.log(this.category);
+            if(this.category){
+                this.params['categories'] = this.category.id;
+            }
 
             this.wp.getPosts(this.params)
                 .subscribe(

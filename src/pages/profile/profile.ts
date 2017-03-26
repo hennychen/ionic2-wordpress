@@ -4,13 +4,16 @@ import { AuthService, WpService } from '../../services/index';
 
 import { NavController } from 'ionic-angular';
 
-import { SignupPagePage } from '../signup-page/signup-page';
+
 
 @Component({
     templateUrl: './profile.html',
 })
 export class ProfilePage {
     userInfo: any = {};
+    hideSignUpView:Boolean = true;
+    registerString: string = 'register';
+    iconname:string = 'person-add';
 
     constructor(
         private auth: AuthService,
@@ -45,7 +48,15 @@ export class ProfilePage {
     }
     register(){
       console.log('register()');
-      this.navCtrl.push(SignupPagePage);
+      this.hideSignUpView = !this.hideSignUpView;
+      if(this.hideSignUpView){
+        this.registerString = 'register';
+        this.iconname = 'person-add';
+      }else{
+        this.registerString = 'login';
+        this.iconname = 'log-in';
+      }
+      // this.navCtrl.push(SignupPagePage);
     }
 
 }

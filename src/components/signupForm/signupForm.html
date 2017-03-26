@@ -1,8 +1,8 @@
 
   <div class="padding">
       become a member
-  </div>  
-    
+  </div>
+
     <form name="signupForm" #signupForm="ngForm" novalidate>
       <ion-list>
         <ion-item>
@@ -32,7 +32,7 @@
         <ion-item>
           <ion-label floating>Password</ion-label>
           <ion-input
-            [(ngModel)]="signupModel.password"
+            [(ngModel)]="signupModel.pwd"
             #password="ngModel"
             name="password"
             type="password"

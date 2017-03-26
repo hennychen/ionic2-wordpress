@@ -7,31 +7,32 @@ import {SITE_URL, UtilService} from '../index';
 export class WpService {
 
     wpApiURL: string = SITE_URL + '/wp-json/wp/v2';
+    wpCustomerApiURL: string = SITE_URL+'/wp-json/customapi/v1'
     comments: any = [];
     jwtHelper: JwtHelper = new JwtHelper();
 
     constructor(
-        private authHttp: AuthHttp, 
+        private authHttp: AuthHttp,
         private util:UtilService,
         private http: Http
     ) {
     }
-
+    // 获取用户信息
     getCurrentUserProfile() {
         return this.authHttp.get(this.wpApiURL + '/users/me')
             .map(res => res.json());
     }
-
+    //注册
     signup(paramsObj) {
         let params = this.util.transformRequest(paramsObj);
         console.log(params);
-        return this.http.post(this.wpApiURL + '/users/?' + params, JSON.stringify(paramsObj))
+        return this.http.post(this.wpCustomerApiURL + '/createuserdata?' + params, JSON.stringify(paramsObj))
             .map(
                 res => res.json()
             );
     }
 
-
+    // 发送留言
     userAddComment(paramsObj) {
         let params = this.util.transformRequest(paramsObj);
         console.log('sending request');
@@ -45,7 +46,15 @@ export class WpService {
                 }
             );
     }
-
+    // 获取所有页面
+    getPages() {
+      return this.http.get(this.wpApiURL + '/pages').map(data => data.json());
+    }
+    // 获取文章分类
+    getCategories() {
+      return this.http.get(this.wpApiURL + '/categories').map(data => data.json());
+    }
+    // 修改留言
     userUpdateComment(id, paramsObj) {
         let params = this.util.transformRequest(paramsObj);
         console.log('sending request');
@@ -67,13 +76,13 @@ export class WpService {
                 }
             );
     }
-
+    // 获取文章数据
     getPosts(paramsObj) {
         let params = this.util.transformRequest(paramsObj);
         return this.http.get(this.wpApiURL + '/posts?' + params)
             .map(res => res.json());
     }
-
+    // 获取某一文章的留言评论
     getCommentsByPostId(paramsObj) {
         let params = this.util.transformRequest(paramsObj);
         return this.http.get(this.wpApiURL + '/comments?' + params)
@@ -82,7 +91,7 @@ export class WpService {
                 return this.comments;
             });
     }
-
+    // 删除留言
     deleteComment(comment) {
         return this.authHttp.delete(this.wpApiURL + '/comments/' + comment.id)
             .map(res => {

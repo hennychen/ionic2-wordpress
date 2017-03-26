@@ -5,9 +5,10 @@
     </button>
     <ion-buttons end>
       <button ion-button (click)="toggleSearch()"><ion-icon name="search"></ion-icon></button>
-      <button ion-button (click)="openSettings()"><ion-icon name="settings"></ion-icon></button>
+      <!-- <button ion-button (click)="openSettings()"><ion-icon name="settings"></ion-icon></button> -->
     </ion-buttons>
-    <ion-title>Home page</ion-title>
+    <ion-title *ngIf="!category">Home page</ion-title>
+    <ion-title *ngIf="category">{{category.name}}</ion-title>
   </ion-navbar>
 
   <ion-toolbar [hidden]="hideSearch">
