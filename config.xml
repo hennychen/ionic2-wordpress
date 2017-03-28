@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.deals694810" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>deals</name>
+  <name>vipho</name>
   <description>An awesome Ionic/Cordova app.</description>
   <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
   <content src="index.html"/>
@@ -31,7 +31,7 @@
   <feature name="InAppBrowser">
     <param name="ios-package" value="CDVInAppBrowser" />
     <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
-  </feature>  
+  </feature>
   <plugin name="ionic-plugin-keyboard" spec="~2.2.1"/>
   <plugin name="cordova-plugin-whitelist" spec="1.3.1"/>
   <plugin name="cordova-plugin-console" spec="1.0.5"/>

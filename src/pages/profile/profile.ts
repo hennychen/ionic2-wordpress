@@ -14,12 +14,18 @@ export class ProfilePage {
     hideSignUpView:Boolean = true;
     registerString: string = 'register';
     iconname:string = 'person-add';
+    personInfo: string = "comments";
+
+    commentsUser : any;
 
     constructor(
         private auth: AuthService,
         private wp: WpService,
         public navCtrl:NavController) {
             console.log(this.auth.user);
+            if(this.auth.authenticated()){
+              this.loadCommentsByUser(this.auth.user.user_email);
+            }
     }
 
     getInfo() {
@@ -41,6 +47,15 @@ export class ProfilePage {
             .subscribe(data => {
                 console.log(data);
             });
+    }
+    loadCommentsByUser(useremail) {
+        this.wp.getCommentsByUserName({"author_email": useremail}).subscribe(
+            data => {
+                console.log(data);
+                this.commentsUser = data;
+            },
+            error => {}
+        );
     }
 
     logout() {

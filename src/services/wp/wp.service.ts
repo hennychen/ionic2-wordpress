@@ -100,6 +100,15 @@ export class WpService {
                 return res.json();
             });
     }
+    //根据用户来获取用户评论
+    getCommentsByUserName(paramsObj){
+      let params = this.util.transformRequest(paramsObj);
+      return this.http.get(this.wpCustomerApiURL + '/getusercomments?' + params)
+          .map(res => {
+              this.comments = res.json();
+              return this.comments;
+          });
+    }
 
     public getCurrentAuthorId(): number {
         let token:any = localStorage.getItem('id_token');

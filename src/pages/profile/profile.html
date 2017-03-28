@@ -17,21 +17,100 @@
   <div *ngIf="!auth.authenticated()">
     <login-form [hidden]="!hideSignUpView"></login-form>
     <signup-form [hidden]="hideSignUpView" ></signup-form>
-    <div>Don't have an account yet? please go to <a href="http://sumsy.com/wp-login.php?action=register" target="_blank">Sumsy.com</a> to <a (click)="register()">{{registerString}}</a>.</div>
+    <div>Don't have an account yet? please go to <a href="http://vipho.cn/wp-login.php?action=register" target="_blank">Sumsy.com</a> to <a (click)="register()">{{registerString}}</a>.</div>
   </div>
 
   <div *ngIf="auth.authenticated()">
     <ion-card>
 
-    <ion-item *ngIf="auth.user">
-      <p>you have logged in.</p>
-      <h2>{{ auth.user.user_display_name }}</h2>
-      <p>{{ auth.user.user_email }}</p>
-    </ion-item>
+      <ion-item *ngIf="auth.user">
+        <p>you have logged in.</p>
+        <h2>{{ auth.user.user_display_name }}</h2>
+        <p>{{ auth.user.user_email }}</p>
+      </ion-item>
 
-  </ion-card>
-  <!-- 退出登录 -->
-  <button ion-button block (click)="logout()">Logout</button>
+    </ion-card>
+    <div>
+      <ion-segment [(ngModel)]="personInfo">
+        <ion-segment-button value="comments">
+          评论
+        </ion-segment-button>
+        <ion-segment-button value="posts">
+          文章
+        </ion-segment-button>
+        <ion-segment-button value="pages">
+          页面
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <div [ngSwitch]="personInfo">
+        <ion-list *ngSwitchCase="'comments'">
+          <ion-item *ngFor="let commentitem of commentsUser">
+            <h2>评论文章:{{commentitem.comment_post.post_title}}</h2>
+            <p>回复:{{commentitem.comment_content}}</p>
+          </ion-item>
+
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'posts'">
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img src="assets/img/thumbnail-kitten-1.jpg">
+            </ion-thumbnail>
+            <h2>Luna</h2>
+          </ion-item>
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img src="assets/img/thumbnail-kitten-3.jpg">
+            </ion-thumbnail>
+            <h2>Milo</h2>
+          </ion-item>
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img src="assets/img/thumbnail-kitten-4.jpg">
+            </ion-thumbnail>
+            <h2>Bandit</h2>
+          </ion-item>
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img src="assets/img/thumbnail-kitten-2.jpg">
+            </ion-thumbnail>
+            <h2>Nala</h2>
+          </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'pages'">
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img src="assets/img/thumbnail-duckling-1.jpg">
+            </ion-thumbnail>
+            <h2>Daffy</h2>
+          </ion-item>
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img src="assets/img/thumbnail-duckling-2.jpg">
+            </ion-thumbnail>
+            <h2>Huey</h2>
+          </ion-item>
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img src="assets/img/thumbnail-duckling-3.jpg">
+            </ion-thumbnail>
+            <h2>Dewey</h2>
+          </ion-item>
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img src="assets/img/thumbnail-duckling-4.jpg">
+            </ion-thumbnail>
+            <h2>Louie</h2>
+          </ion-item>
+        </ion-list>
+      </div>
+    <div>
+      <!-- 退出登录 -->
+      <button ion-button block (click)="logout()">Logout</button>
+    </div>
   </div>
+
 
 </ion-content>
