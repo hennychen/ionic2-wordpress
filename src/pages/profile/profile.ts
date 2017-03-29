@@ -4,11 +4,26 @@ import { AuthService, WpService } from '../../services/index';
 
 import { NavController } from 'ionic-angular';
 
-
+import { PostDetail } from '../../pages/postDetail/post-detail.component';
 
 @Component({
     templateUrl: './profile.html',
 })
+// export class PostClass{
+//   constructor(
+//     public author:string,
+//     public date:string,
+//     public date_gmt:string,
+//     public content:string,
+//     public title:string,
+//     public excerpt:string,
+//     public status:string,
+//     public name:string,
+//     public modified:string
+//   ){
+//
+//   }
+// }
 export class ProfilePage {
     userInfo: any = {};
     hideSignUpView:Boolean = true;
@@ -35,7 +50,7 @@ export class ProfilePage {
         }, (error) => {
         });
     }
-
+//
     userAddComment() {
         let obj = {
             author: 1,
@@ -48,6 +63,7 @@ export class ProfilePage {
                 console.log(data);
             });
     }
+    // get user comments
     loadCommentsByUser(useremail) {
         this.wp.getCommentsByUserName({"author_email": useremail}).subscribe(
             data => {
@@ -57,10 +73,11 @@ export class ProfilePage {
             error => {}
         );
     }
-
+    // logout
     logout() {
         this.auth.logout();
     }
+    // 注册登录
     register(){
       console.log('register()');
       this.hideSignUpView = !this.hideSignUpView;
@@ -72,6 +89,15 @@ export class ProfilePage {
         this.iconname = 'log-in';
       }
       // this.navCtrl.push(SignupPagePage);
+    }
+
+    //点击跳转到详情
+    openPost(postIDParam) {
+      console.log(postIDParam);
+
+        this.navCtrl.push(PostDetail, {
+            postID: postIDParam
+        });
     }
 
 }

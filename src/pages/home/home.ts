@@ -111,6 +111,7 @@ export class Home {
     }
     //点击跳转到详情
     postTapped(event, post) {
+      console.log(post);
         this.nav.push(PostDetail, {
             post: post
         });

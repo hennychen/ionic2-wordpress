@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
+import { WpService } from '../../services/index';
 
 @Component({
     templateUrl:  'post-detail.html'
@@ -7,22 +8,48 @@ import {NavController, NavParams} from 'ionic-angular';
 
 export class PostDetail {
     selectedPost : any;
-    isEditMode: boolean = false; 
+    isEditMode: boolean = false;
+
 
     comment: any = {
         content: {rendered: ''},
         author: null,
         post: null
     }
+    params: any ={};
 
-    constructor(private nav: NavController, navParams: NavParams) {
-        this.selectedPost = navParams.get('post');
+    constructor(private nav: NavController,public navParams: NavParams,public wp:WpService) {
+
+      let postidParams = this.navParams.get('postID');
+      if(postidParams){
+        this.postId = postidParams;
+        console.log('-----'+this.navParams.get('postID'));
+        this.getPostByID(postidParams);
+      }else{
+        this.selectedPost = this.navParams.get('post');
+      }
+
+    }
+    getPostByID(postidParams){
+
+      this.wp.getPostDataByID(postidParams)
+          .subscribe(
+              data => {
+                  this.selectedPost = data;
+                  console.log(data);
+
+              },
+              error => {
+
+                  console.log(error);
+              }
+          );
     }
 
     editCommentChanged(selecteComment) {
         selecteComment.content.rendered = selecteComment.content.rendered.replace(/<br \/>/g, '');
         this.comment = selecteComment;
-        this.isEditMode = true;   
+        this.isEditMode = true;
     }
 
-} 
+}

@@ -45,7 +45,7 @@
     </div>
     <div [ngSwitch]="personInfo">
         <ion-list *ngSwitchCase="'comments'">
-          <ion-item *ngFor="let commentitem of commentsUser">
+          <ion-item *ngFor="let commentitem of commentsUser" (click)="openPost(commentitem.comment_post_ID)">
             <h2>评论文章:{{commentitem.comment_post.post_title}}</h2>
             <p>回复:{{commentitem.comment_content}}</p>
           </ion-item>

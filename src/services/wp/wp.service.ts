@@ -82,6 +82,12 @@ export class WpService {
         return this.http.get(this.wpApiURL + '/posts?' + params)
             .map(res => res.json());
     }
+    // 获取文章数据
+    getPostDataByID(postsID) {
+      console.log(this.wpApiURL + '/posts/' + postsID);
+        return this.http.get(this.wpApiURL + '/posts/' + postsID)
+            .map(res => res.json());
+    }
     // 获取某一文章的留言评论
     getCommentsByPostId(paramsObj) {
         let params = this.util.transformRequest(paramsObj);
