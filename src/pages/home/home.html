@@ -12,7 +12,7 @@
   </ion-navbar>
 
   <ion-toolbar [hidden]="hideSearch">
-    <ion-searchbar (ionInput)="searchItem($event)" ></ion-searchbar>
+    <ion-searchbar #searchInput (ionInput)="searchItem(searchInput.value)" ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 

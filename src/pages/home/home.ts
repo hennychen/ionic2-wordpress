@@ -60,12 +60,13 @@ export class Home {
         this.hidePostList = !this.hideSearch;
     }
     // 搜索关键字
-    searchItem(ev:any){
+    searchItem(value: string){
+        console.log(value);
         // set val to the value of the searchbar
-        let val = ev.target.value;
+        // let val = ev.target.value;
 
-        console.log(val);
-        this.params['search'] = val;
+        // console.log(val);
+        this.params['search'] = value;
         this.wp.getPosts(this.params)
             .subscribe(
                 data => {
