@@ -53,30 +53,17 @@
         </ion-list>
 
         <ion-list *ngSwitchCase="'posts'">
-          <ion-item>
-            <ion-thumbnail item-left>
-              <img src="assets/img/thumbnail-kitten-1.jpg">
-            </ion-thumbnail>
-            <h2>Luna</h2>
-          </ion-item>
-          <ion-item>
-            <ion-thumbnail item-left>
-              <img src="assets/img/thumbnail-kitten-3.jpg">
-            </ion-thumbnail>
-            <h2>Milo</h2>
-          </ion-item>
-          <ion-item>
-            <ion-thumbnail item-left>
-              <img src="assets/img/thumbnail-kitten-4.jpg">
-            </ion-thumbnail>
-            <h2>Bandit</h2>
-          </ion-item>
-          <ion-item>
-            <ion-thumbnail item-left>
-              <img src="assets/img/thumbnail-kitten-2.jpg">
-            </ion-thumbnail>
-            <h2>Nala</h2>
-          </ion-item>
+          <div  ion-item *ngFor="let post of posts">
+          <ion-thumbnail item-left>
+
+              <img *ngIf="post.better_featured_image && post.better_featured_image.media_details.sizes.thumbnail.source_url" [src]="post.better_featured_image.media_details.sizes.thumbnail.source_url">
+
+              <img *ngIf="!(post.better_featured_image && post.better_featured_image.media_details.sizes.thumbnail.source_url) && post.better_featured_image
+      " [src]="post.better_featured_image">
+
+          </ion-thumbnail>
+          <h2 [innerHTML]="post.title.rendered" (click)="postTapped($event, post)"></h2>
+          </div>
         </ion-list>
 
         <ion-list *ngSwitchCase="'pages'">

@@ -9,21 +9,7 @@ import { PostDetail } from '../../pages/postDetail/post-detail.component';
 @Component({
     templateUrl: './profile.html',
 })
-// export class PostClass{
-//   constructor(
-//     public author:string,
-//     public date:string,
-//     public date_gmt:string,
-//     public content:string,
-//     public title:string,
-//     public excerpt:string,
-//     public status:string,
-//     public name:string,
-//     public modified:string
-//   ){
-//
-//   }
-// }
+
 export class ProfilePage {
     userInfo: any = {};
     hideSignUpView:Boolean = true;
@@ -31,6 +17,7 @@ export class ProfilePage {
     iconname:string = 'person-add';
     personInfo: string = "comments";
 
+    posts: any;
     commentsUser : any;
 
     constructor(
@@ -40,6 +27,7 @@ export class ProfilePage {
             console.log(this.auth.user);
             if(this.auth.authenticated()){
               this.loadCommentsByUser(this.auth.user.user_email);
+              this.getUserPosts(this.wp.getCurrentAuthorId());
             }
     }
 
@@ -49,6 +37,18 @@ export class ProfilePage {
             console.log(data);
         }, (error) => {
         });
+    }
+    getUserPosts(authorid){
+      this.wp.getPosts({author:authorid})
+          .subscribe(
+              data => {
+                  this.posts = data;
+
+              },
+              error => {
+                  console.log(error);
+              }
+          );
     }
 //
     userAddComment() {
