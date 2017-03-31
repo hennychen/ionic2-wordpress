@@ -46,10 +46,7 @@ export class WpService {
                 }
             );
     }
-    // 获取所有页面
-    getPages() {
-      return this.http.get(this.wpApiURL + '/pages').map(data => data.json());
-    }
+
     // 获取文章分类
     getCategories() {
       return this.http.get(this.wpApiURL + '/categories').map(data => data.json());
@@ -75,6 +72,11 @@ export class WpService {
                     return updatedComment;
                 }
             );
+    }
+    // 获取所有页面
+    getPages(paramsObj) {
+      let params = this.util.transformRequest(paramsObj);
+      return this.http.get(this.wpApiURL + '/pages?' + params ).map(data => data.json());
     }
     // 获取文章数据
     getPosts(paramsObj) {

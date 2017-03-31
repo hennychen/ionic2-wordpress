@@ -16,10 +16,14 @@ export class WppagePage {
 
   pages:Array<any>;
   isLoading: boolean = false;
+  // 查询参数
+  params = {
+  };
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private wp: WpService) {
     this.isLoading = true;
-    this.wp.getPages()
+    this.wp.getPages(this.params)
         .subscribe(pages => {
             this.pages = pages;
             this.isLoading = false;

@@ -62,35 +62,18 @@
       " [src]="post.better_featured_image">
 
           </ion-thumbnail>
-          <h2 [innerHTML]="post.title.rendered" (click)="postTapped($event, post)"></h2>
+          <h2 [innerHTML]="post.title.rendered" (click)="openPost(post.id)"></h2>
           </div>
         </ion-list>
 
         <ion-list *ngSwitchCase="'pages'">
-          <ion-item>
+          <ion-item *ngFor="let page of pages" (click)="openPage(page)">
             <ion-thumbnail item-left>
               <img src="assets/img/thumbnail-duckling-1.jpg">
             </ion-thumbnail>
-            <h2>Daffy</h2>
+            <h2>{{page.title.rendered}}</h2>
           </ion-item>
-          <ion-item>
-            <ion-thumbnail item-left>
-              <img src="assets/img/thumbnail-duckling-2.jpg">
-            </ion-thumbnail>
-            <h2>Huey</h2>
-          </ion-item>
-          <ion-item>
-            <ion-thumbnail item-left>
-              <img src="assets/img/thumbnail-duckling-3.jpg">
-            </ion-thumbnail>
-            <h2>Dewey</h2>
-          </ion-item>
-          <ion-item>
-            <ion-thumbnail item-left>
-              <img src="assets/img/thumbnail-duckling-4.jpg">
-            </ion-thumbnail>
-            <h2>Louie</h2>
-          </ion-item>
+          
         </ion-list>
       </div>
     <div>

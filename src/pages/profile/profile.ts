@@ -5,9 +5,10 @@ import { AuthService, WpService } from '../../services/index';
 import { NavController } from 'ionic-angular';
 
 import { PostDetail } from '../../pages/postDetail/post-detail.component';
+import { WppagedetailPage } from '../wppagedetail/wppagedetail';
 
 @Component({
-    templateUrl: './profile.html',
+    templateUrl: './profile.html'
 })
 
 export class ProfilePage {
@@ -19,6 +20,7 @@ export class ProfilePage {
 
     posts: any;
     commentsUser : any;
+    pages: any;
 
     constructor(
         private auth: AuthService,
@@ -28,6 +30,7 @@ export class ProfilePage {
             if(this.auth.authenticated()){
               this.loadCommentsByUser(this.auth.user.user_email);
               this.getUserPosts(this.wp.getCurrentAuthorId());
+              this.getUserPages(this.wp.getCurrentAuthorId());
             }
     }
 
@@ -37,6 +40,14 @@ export class ProfilePage {
             console.log(data);
         }, (error) => {
         });
+    }
+    //获取用户创建的pages
+    getUserPages(authorid){
+      this.wp.getPages({author:authorid}).subscribe(pages => {
+          this.pages = pages;
+
+      }, ()=> {
+      });
     }
     getUserPosts(authorid){
       this.wp.getPosts({author:authorid})
@@ -99,5 +110,9 @@ export class ProfilePage {
             postID: postIDParam
         });
     }
+
+    openPage(page) {
+          this.navCtrl.push(WppagedetailPage, {page: page});
+      }
 
 }
