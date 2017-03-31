@@ -7,7 +7,11 @@ import { WpService } from '../../services/index';
 })
 
 export class PostDetail {
-    selectedPost : any;
+    selectedPost : any = {
+      title: {rendered: ''},
+      id: null,
+      content: {rendered: ''}
+    }
     isEditMode: boolean = false;
 
 
@@ -22,7 +26,7 @@ export class PostDetail {
 
       let postidParams = this.navParams.get('postID');
       if(postidParams){
-        this.postId = postidParams;
+        // this.postId = postidParams;
         console.log('-----'+this.navParams.get('postID'));
         this.getPostByID(postidParams);
       }else{
