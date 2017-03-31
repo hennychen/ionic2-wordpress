@@ -29,7 +29,7 @@ export class ProfilePage {
             console.log(this.auth.user);
             if(this.auth.authenticated()){
               this.loadCommentsByUser(this.auth.user.user_email);
-              this.getUserPosts(this.wp.getCurrentAuthorId());
+              this.getUserPosts(this.wp.getCurrentAuthorId(),null);
               this.getUserPages(this.wp.getCurrentAuthorId());
             }
     }
@@ -49,12 +49,14 @@ export class ProfilePage {
       }, ()=> {
       });
     }
-    getUserPosts(authorid){
+    getUserPosts(authorid,refresher){
       this.wp.getPosts({author:authorid})
           .subscribe(
               data => {
                   this.posts = data;
-
+                  if(refresher){
+                    refresher.complete();
+                  }
               },
               error => {
                   console.log(error);
@@ -104,15 +106,58 @@ export class ProfilePage {
 
     //点击跳转到详情
     openPost(postIDParam) {
-      console.log(postIDParam);
-
+        console.log(postIDParam);
         this.navCtrl.push(PostDetail, {
             postID: postIDParam
         });
     }
 
     openPage(page) {
-          this.navCtrl.push(WppagedetailPage, {page: page});
-      }
+        this.navCtrl.push(WppagedetailPage, {page: page});
+    }
+
+    // 下拉刷新
+    doRefresh(refresher) {
+        console.log('Begin async operation', refresher);
+        switch(this.personInfo){
+          case 'comments':{
+            console.log('doRefresh - comments');
+            this.wp.getCommentsByUserName({"author_email": this.wp.getCurrentAuthorId()}).subscribe(
+                data => {
+                    console.log(data);
+                    this.commentsUser = data;
+                    refresher.complete();
+                },
+                error => {
+
+                }
+            );
+
+            break;
+          }
+          case 'posts':{
+            console.log('doRefresh - posts');
+            this.getUserPosts(this.wp.getCurrentAuthorId(),refresher);
+            break;
+          }
+          case 'pages':{
+            console.log('doRefresh - pages');
+            this.wp.getPages({author:this.wp.getCurrentAuthorId()}).subscribe(pages => {
+                this.pages = pages;
+                refresher.complete();
+            }, ()=> {
+            });
+            break;
+          }
+
+          default:{
+            break;
+          }
+
+
+        }
+
+
+    }
 
 }

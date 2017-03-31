@@ -14,6 +14,14 @@
 
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+  </ion-refresher>
   <div *ngIf="!auth.authenticated()">
     <login-form [hidden]="!hideSignUpView"></login-form>
     <signup-form [hidden]="hideSignUpView" ></signup-form>
@@ -49,13 +57,13 @@
             <h2>评论文章:{{commentitem.comment_post.post_title}}</h2>
             <p>回复:{{commentitem.comment_content}}</p>
           </ion-item>
-
         </ion-list>
 
         <ion-list *ngSwitchCase="'posts'">
-          <div  ion-item *ngFor="let post of posts">
-          <ion-thumbnail item-left>
 
+          <div  ion-item *ngFor="let post of posts">
+
+          <ion-thumbnail item-left>
               <img *ngIf="post.better_featured_image && post.better_featured_image.media_details.sizes.thumbnail.source_url" [src]="post.better_featured_image.media_details.sizes.thumbnail.source_url">
 
               <img *ngIf="!(post.better_featured_image && post.better_featured_image.media_details.sizes.thumbnail.source_url) && post.better_featured_image
@@ -69,11 +77,14 @@
         <ion-list *ngSwitchCase="'pages'">
           <ion-item *ngFor="let page of pages" (click)="openPage(page)">
             <ion-thumbnail item-left>
-              <img src="assets/img/thumbnail-duckling-1.jpg">
+              <img *ngIf="page.better_featured_image && page.better_featured_image.media_details.sizes.thumbnail.source_url" [src]="page.better_featured_image.media_details.sizes.thumbnail.source_url">
+
+              <img *ngIf="!(page.better_featured_image && page.better_featured_image.media_details.sizes.thumbnail.source_url) && page.better_featured_image
+      " [src]="post.better_featured_image">
             </ion-thumbnail>
             <h2>{{page.title.rendered}}</h2>
           </ion-item>
-          
+
         </ion-list>
       </div>
     <div>
