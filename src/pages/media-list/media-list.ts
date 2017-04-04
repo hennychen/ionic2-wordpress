@@ -10,6 +10,9 @@ import { FilePath } from '@ionic-native/file-path';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+
+declare var cordova: any;
+
 @Component({
   selector: 'page-media-list',
   templateUrl: 'media-list.html',
@@ -20,7 +23,7 @@ export class MediaListPage {
 
   lastImage: string = null;
   loading: Loading;
-  cordova: any;
+
   constructor(private filePath: FilePath,private transfer: Transfer,private file: File,private camera: Camera,public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController) {}
 
   public presentActionSheet() {
@@ -85,7 +88,7 @@ private createFileName() {
 
 // Copy the image to a local folder
 private copyFileToLocalDir(namePath, currentName, newFileName) {
-  this.file.copyFile(namePath, currentName, this.cordova.file.dataDirectory, newFileName).then(success => {
+  this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
     this.lastImage = newFileName;
   }, error => {
     this.presentToast('Error while storing file.');
@@ -106,7 +109,7 @@ public pathForImage(img) {
   if (img === null) {
     return '';
   } else {
-    return this.cordova.file.dataDirectory + img;
+    return cordova.file.dataDirectory + img;
   }
 }
 public uploadImage() {
