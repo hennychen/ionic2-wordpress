@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { HtmlPipe } from '../../pipes/htmlPipe';
+
 
 /*
   Generated class for the Wppagedetail page.
