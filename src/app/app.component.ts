@@ -4,7 +4,6 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { Home } from '../pages/home/home';
 import { ProfilePage } from '../pages/profile/profile';
 import { UtilService } from '../services/index';
-import { SettingPagePage } from '../pages/setting-page/setting-page';
 import { CategoryPage } from '../pages/category/category';
 import { WppagePage } from '../pages/wppage/wppage';
 

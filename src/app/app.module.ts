@@ -13,7 +13,6 @@ import { LoginFormComponent } from '../components/loginForm/loginForm.component'
 import { CommentsListComponent } from '../components/commentsList/commentsList.component';
 import { CommentFormComponent } from '../components/commentForm/commentForm.component';
 import { SignupFormComponent } from '../components/signupForm/signupForm.component';
-import { SettingPagePage } from '../pages/setting-page/setting-page';
 import { CategoryPage } from '../pages/category/category';
 import { WppagePage } from '../pages/wppage/wppage';
 import { WppagedetailPage } from '../pages/wppagedetail/wppagedetail';
@@ -37,7 +36,6 @@ export function getAuthHttp(http) {
     CommentsListComponent,
     CommentFormComponent,
     SignupFormComponent,
-    SettingPagePage,
     CategoryPage,
     WppagePage,
     WppagedetailPage,
@@ -53,7 +51,6 @@ export function getAuthHttp(http) {
     PostDetail,
     StoresPosts,
     ProfilePage,
-    SettingPagePage,
     CategoryPage,
     WppagePage,
     WppagedetailPage
