@@ -17,6 +17,7 @@ import { CategoryPage } from '../pages/category/category';
 import { WppagePage } from '../pages/wppage/wppage';
 import { WppagedetailPage } from '../pages/wppagedetail/wppagedetail';
 import { HtmlPipe } from '../pipes/htmlPipe';
+import { MediaListPage } from '../pages/media-list/media-list';
 
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
@@ -39,7 +40,8 @@ export function getAuthHttp(http) {
     CategoryPage,
     WppagePage,
     WppagedetailPage,
-    HtmlPipe
+    HtmlPipe,
+    MediaListPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -53,7 +55,8 @@ export function getAuthHttp(http) {
     ProfilePage,
     CategoryPage,
     WppagePage,
-    WppagedetailPage
+    WppagedetailPage,
+    MediaListPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

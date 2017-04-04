@@ -6,7 +6,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { UtilService } from '../services/index';
 import { CategoryPage } from '../pages/category/category';
 import { WppagePage } from '../pages/wppage/wppage';
-
+import { MediaListPage } from '../pages/media-list/media-list';
 @Component({
   templateUrl: 'app.html'
 })
@@ -25,7 +25,8 @@ export class MyApp {
       { title: 'Home', component: Home},
       { title: 'Profile', component: ProfilePage },
       { title: 'Category', component: CategoryPage },
-      { title: 'PageList', component: WppagePage }
+      { title: 'PageList', component: WppagePage },
+      { title: 'MediaListPage', component: MediaListPage }
     ];
 
   }
