@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
+import { NavController,ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
+import { WpService } from '../../services/index';
 /*
   Generated class for the MediaList page.
 
@@ -23,8 +24,17 @@ export class MediaListPage {
 
   lastImage: string = null;
   loading: Loading;
+  errormsg: string ;
 
-  constructor(private filePath: FilePath,private transfer: Transfer,private file: File,private camera: Camera,public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController) {}
+  constructor(private filePath: FilePath,
+    private transfer: Transfer,
+    private file: File,
+    private camera: Camera,
+    public navCtrl: NavController,
+    public actionSheetCtrl: ActionSheetController,
+    public toastCtrl: ToastController,
+    public platform: Platform,
+    public loadingCtrl: LoadingController,private wp: WpService) {}
 
   public presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -114,7 +124,7 @@ public pathForImage(img) {
 }
 public uploadImage() {
   // Destination URL
-  var url = "http://192.168.2.240/upload.php";
+  var url = "http://vipho.cn/wp-json/wp/v2/media";
 
   // File for Upload
   var targetPath = this.pathForImage(this.lastImage);
@@ -125,9 +135,16 @@ public uploadImage() {
   var options = {
     fileKey: "file",
     fileName: filename,
+    httpMethod: "POST",
     chunkedMode: false,
     mimeType: "multipart/form-data",
-    params : {'fileName': filename}
+    headers: {
+      "Content-Disposition" : "attachment;filename="+filename,
+      "Authorization": "Bearer  "+localStorage.getItem('id_token'),
+    },
+    params : {
+      'fileName': filename
+      }
   };
 
   const fileTransfer: TransferObject = this.transfer.create();
@@ -144,6 +161,7 @@ public uploadImage() {
   }, err => {
     this.loading.dismissAll()
     this.presentToast('Error while uploading file.');
+    this.errormsg = err;
   });
 }
   ionViewDidLoad() {

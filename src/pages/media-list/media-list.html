@@ -7,6 +7,9 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>mediaList</ion-title>
   </ion-navbar>
 
@@ -14,8 +17,10 @@
 
 
 <ion-content padding>
+  <p>{{errormsg}}</p>
  <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
  <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
+
 </ion-content>
 
 <ion-footer>
