@@ -27,6 +27,21 @@ export class MediaListPage {
   errormsg: string ;
   progressValue: any;
   progressEvent: ProgressEvent ;
+  medias:any;
+  media:any = {
+    guid:{rendered:''},
+    title:{rendered:''},
+    media_details:{
+      sizes:{
+        thumbnail:{
+          source_url:''
+        },
+        medium:{
+          source_url:''
+        }
+      }
+    }
+  };
 
   constructor(private filePath: FilePath,
     private transfer: Transfer,
@@ -36,7 +51,9 @@ export class MediaListPage {
     public actionSheetCtrl: ActionSheetController,
     public toastCtrl: ToastController,
     public platform: Platform,
-    public loadingCtrl: LoadingController,private wp: WpService) {}
+    public loadingCtrl: LoadingController,private wp: WpService) {
+
+    }
 
   public presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -180,7 +197,20 @@ public uploadImage() {
   });
 }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MediaListPage');
+    // console.log('ionViewDidLoad MediaListPage');
+     this.wp.getMedias({"author":this.wp.getCurrentAuthorId()}).subscribe(
+      (data) => {
+        // console.log(data);
+        this.medias = data;
+      },(err) => {
+        console.log(err);
+      },() => {
+        console.log("completed");
+        console.log(this.medias);
+        // this.media = this.medias[0];
+        // console.log(this.media);
+      });
+
   }
 
 

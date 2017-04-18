@@ -9,6 +9,7 @@ export class WpService {
     wpApiURL: string = SITE_URL + '/wp-json/wp/v2';
     wpCustomerApiURL: string = SITE_URL+'/wp-json/customapi/v1'
     comments: any = [];
+    medias:any = [];
     jwtHelper: JwtHelper = new JwtHelper();
 
     constructor(
@@ -116,6 +117,13 @@ export class WpService {
               this.comments = res.json();
               return this.comments;
           });
+    }
+    getMedias(paramsObj){
+      let params = this.util.transformRequest(paramsObj);
+      return this.http.get(this.wpApiURL + '/media?' + params).map(res => {
+          this.medias = res.json();
+          return this.medias;
+      });
     }
 
     public getCurrentAuthorId(): number {

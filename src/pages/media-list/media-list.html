@@ -15,14 +15,35 @@
 
 </ion-header>
 
+<ion-content text-center class="page-media-list">
+<!-- 列表形式 -->
+  <!-- <ion-list *ngFor="let media of medias" >
 
-<ion-content padding>
+      <ion-item >
+        <ion-thumbnail item-left>
+          <img [src]="media.guid.rendered">
+        </ion-thumbnail>
+        <h2>My Neighbor Totoro</h2>
+        <p>Hayao Miyazaki • 1988</p>
+        <button ion-button clear item-right>View</button>
+      </ion-item>
+
+
+
+    </ion-list> -->
+    <!-- 网格形式 -->
+  <ion-row >
+    <ion-col *ngFor="let media of medias"><img [src]="media.media_details.sizes.thumbnail.source_url"><p>{{media.title.rendered}}</p></ion-col>
+  </ion-row>
+
+</ion-content>
+<!-- <ion-content padding>
   <p>{{errormsg}}</p>
  <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
  <p>上传进度:{{progressValue}}</p>
  <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
 
-</ion-content>
+</ion-content> -->
 
 <ion-footer>
  <ion-toolbar color="primary">
