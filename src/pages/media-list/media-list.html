@@ -19,6 +19,7 @@
 <ion-content padding>
   <p>{{errormsg}}</p>
  <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+ <p>上传进度:{{progressValue}}</p>
  <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
 
 </ion-content>

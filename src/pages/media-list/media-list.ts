@@ -25,6 +25,8 @@ export class MediaListPage {
   lastImage: string = null;
   loading: Loading;
   errormsg: string ;
+  progressValue: any;
+  progressEvent: ProgressEvent ;
 
   constructor(private filePath: FilePath,
     private transfer: Transfer,
@@ -152,12 +154,25 @@ public uploadImage() {
   this.loading = this.loadingCtrl.create({
     content: 'Uploading...',
   });
+
   this.loading.present();
+  fileTransfer.onProgress = function(progressEvent) {
+    this.progressEvent = progressEvent;
+
+      if (this.progressEvent.lengthComputable) {
+          // loadingStatus.setPercentage(progressEvent.loaded / progressEvent.total);
+          this.progressValue = this.progressEvent.loaded / this.progressEvent.loaded;
+          console.log(this.progressValue);
+      } else {
+          // loadingStatus.increment();
+      }
+  };
 
   // Use the FileTransfer to upload the image
   fileTransfer.upload(targetPath, url, options).then(data => {
     this.loading.dismissAll()
     this.presentToast('Image succesful uploaded.');
+    console.log(data);
   }, err => {
     this.loading.dismissAll()
     this.presentToast('Error while uploading file.');
