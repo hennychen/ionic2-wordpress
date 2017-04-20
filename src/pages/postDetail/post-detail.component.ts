@@ -94,6 +94,7 @@ export class PostDetail {
         this.comment = selecteComment;
         this.isEditMode = true;
     }
+    // 判断邮件是否能分享
     shareByEmail(){
         // Check if sharing via email is supported
         this.socialSharing.canShareViaEmail().then(() => {
@@ -106,6 +107,7 @@ export class PostDetail {
           this.presentToast(" is not possible ispossible");
         });
     }
+    // 邮件分享
     shareEmailContent(){
       // Share via email
       this.socialSharing.shareViaEmail(this.selectedPost.link+this.selectedPost.content.rendered, this.selectedPost.title.rendered, ['511308538@qq.com']).then(() => {
@@ -116,5 +118,72 @@ export class PostDetail {
         this.presentToast("error");
       });
     }
+
+    shareWxSession(){
+    let wechat = (<any>window).Wechat;
+    wechat.isInstalled(function (installed) {
+      if(!installed){
+         this.presentToast('您没有安装微信！');
+        return ;
+      }
+    }, function (reason) {
+         this.presentToast("Failed: " + reason);
+    });
+    var title = this.selectedPost.title.rendered;
+    var url =  this.selectedPost.link;
+    var imagurl = this.selectedPost.better_featured_image.source_url?this.selectedPost.better_featured_image.source_url:"http://vipho.cn/wp-content/uploads/2017/04/cropped-logo2-1.jpg";
+
+    wechat.share({
+    message: {
+        title: title,
+        description: title,
+        thumb: imagurl,
+        media: {
+            type: wechat.Type.LINK,
+            webpageUrl: url
+        }
+    },
+        scene: wechat.Scene.SESSION   // share to SESSION
+    }, function () {
+       this.presentToast('分享成功');
+    }, function (reason) {
+        console.log("Failed: " + reason);
+        this.presentToast(reason);
+    });
+  }
+
+
+  shareWxTimeLine(){
+    let wechat = (<any>window).Wechat;
+    wechat.isInstalled(function (installed) {
+      if(!installed){
+        this.presentToast('您没有安装微信！');
+        return ;
+      }
+    }, function (reason) {
+        this.presentToast("Failed: " + reason);
+    });
+    var title = this.selectedPost.title.rendered;
+    var url =  this.selectedPost.link;
+    var imagurl = this.selectedPost.better_featured_image.source_url?this.selectedPost.better_featured_image.source_url:"http://vipho.cn/wp-content/uploads/2017/04/cropped-logo2-1.jpg";
+
+    wechat.share({
+      message: {
+          title: title,
+          description: title,
+          thumb: imagurl,
+          media: {
+              type: wechat.Type.LINK,
+              webpageUrl: url
+          }
+      },
+          scene: wechat.Scene.TIMELINE   // share to Timeline
+      }, function () {
+         this.presentToast('分享成功','bottom',4000);
+      }, function (reason) {
+          console.log("Failed: " + reason);
+    });
+
+  }
 
 }
