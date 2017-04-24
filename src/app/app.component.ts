@@ -7,6 +7,7 @@ import { UtilService } from '../services/index';
 import { CategoryPage } from '../pages/category/category';
 import { WppagePage } from '../pages/wppage/wppage';
 import { MediaListPage } from '../pages/media-list/media-list';
+import { PostEditorPage } from '../pages/post-editor/post-editor';
 @Component({
   templateUrl: 'app.html'
 })
@@ -24,6 +25,7 @@ export class MyApp {
     this.pages = [
       { title: '主页', component: Home},
       { title: '个人', component: ProfilePage },
+      { title: '发布文章',component: PostEditorPage },
       { title: '分类', component: CategoryPage },
       { title: '页面', component: WppagePage },
       { title: '素材', component: MediaListPage }

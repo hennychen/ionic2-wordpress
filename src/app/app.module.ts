@@ -13,12 +13,13 @@ import { LoginFormComponent } from '../components/loginForm/loginForm.component'
 import { CommentsListComponent } from '../components/commentsList/commentsList.component';
 import { CommentFormComponent } from '../components/commentForm/commentForm.component';
 import { SignupFormComponent } from '../components/signupForm/signupForm.component';
+import { TinyEditorComponent } from '../components/tiny-editor/tiny-editor';
 import { CategoryPage } from '../pages/category/category';
 import { WppagePage } from '../pages/wppage/wppage';
 import { WppagedetailPage } from '../pages/wppagedetail/wppagedetail';
 import { HtmlPipe } from '../pipes/htmlPipe';
 import { MediaListPage } from '../pages/media-list/media-list';
-
+import { PostEditorPage } from '../pages/post-editor/post-editor';
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
     globalHeaders: [{ 'Accept': 'application/json' }],
@@ -36,11 +37,13 @@ export function getAuthHttp(http) {
     LoginFormComponent,
     CommentsListComponent,
     CommentFormComponent,
+    TinyEditorComponent,
     SignupFormComponent,
     CategoryPage,
     WppagePage,
     WppagedetailPage,
     HtmlPipe,
+    PostEditorPage,
     MediaListPage
   ],
   imports: [
@@ -56,6 +59,7 @@ export function getAuthHttp(http) {
     CategoryPage,
     WppagePage,
     WppagedetailPage,
+    PostEditorPage,
     MediaListPage
   ],
   providers: [

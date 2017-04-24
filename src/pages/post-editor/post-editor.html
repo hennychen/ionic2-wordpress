@@ -1,0 +1,19 @@
+<!--
+  Generated template for the PostEditor page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>PostEditor</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <tiny-editor  [elementId]="'my-editor'" (onEditorContentChange)="keyupHandler($event)">test</tiny-editor>
+</ion-content>
