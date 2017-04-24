@@ -22,11 +22,11 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: Home},
-      { title: 'Profile', component: ProfilePage },
-      { title: 'Category', component: CategoryPage },
-      { title: 'PageList', component: WppagePage },
-      { title: 'MediaListPage', component: MediaListPage }
+      { title: '主页', component: Home},
+      { title: '个人', component: ProfilePage },
+      { title: '分类', component: CategoryPage },
+      { title: '页面', component: WppagePage },
+      { title: '素材', component: MediaListPage }
     ];
 
   }

@@ -16,6 +16,7 @@
 </ion-header>
 
 <ion-content text-center class="page-media-list">
+  <ion-spinner name="bubbles" *ngIf="isLoading"></ion-spinner>
 <!-- 列表形式 -->
   <!-- <ion-list *ngFor="let media of medias" >
 
@@ -32,10 +33,23 @@
 
     </ion-list> -->
     <!-- 网格形式 -->
-  <ion-row >
+  <ion-row [hidden]="isShow" >
     <ion-col *ngFor="let media of medias"><img [src]="media.media_details.sizes.thumbnail.source_url"><p>{{media.title.rendered}}</p></ion-col>
   </ion-row>
+  <div [hidden]="isShowMutilUploadView">
+    <ion-row  >
+      <ion-col *ngFor="let imgpickUrl of localImgsArray">
+        <img src="{{imgpickUrl}}" />
+      </ion-col>
 
+     </ion-row>
+ </div>
+ <div [hidden]="isShowSignleUploadView">
+   <p>{{errormsg}}</p>
+  <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+  <p>上传进度:{{progressValue}}</p>
+  <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
+ </div>
 </ion-content>
 <!-- <ion-content padding>
   <p>{{errormsg}}</p>
@@ -49,10 +63,10 @@
  <ion-toolbar color="primary">
    <ion-buttons>
      <button ion-button icon-left (click)="presentActionSheet()">
-       <ion-icon name="camera"></ion-icon>Select Image
+       <ion-icon name="camera"></ion-icon>选择图片
      </button>
-     <button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">
-       <ion-icon name="cloud-upload"></ion-icon>Upload
+     <button ion-button icon-left (click)="uploadImage()" [disabled]="!enableUpload">
+       <ion-icon name="cloud-upload"></ion-icon>上传
      </button>
    </ion-buttons>
  </ion-toolbar>
