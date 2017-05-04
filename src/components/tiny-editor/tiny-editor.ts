@@ -48,7 +48,7 @@ export class TinyEditorComponent implements AfterViewInit,OnInit, OnDestroy,OnCh
         let onInserImage = this.onInserImage;
         this.editorcontrol = editor;
         let elementid = this.elementId;
-        let insertContentString = this.hinsertContentString;
+
 
       editor.addButton('resourcesext', {
          text: '图片',
@@ -75,7 +75,7 @@ export class TinyEditorComponent implements AfterViewInit,OnInit, OnDestroy,OnCh
     console.log("ngOnInit---"+this.hinsertContentString);
   }
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    let log: string[] = [];
+
     for (let propName in changes) {
       let changedProp = changes[propName];
       if(propName == "hinsertContentString" && changedProp.currentValue != null){
