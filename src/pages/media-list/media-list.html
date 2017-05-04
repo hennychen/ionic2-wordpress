@@ -34,7 +34,7 @@
     </ion-list> -->
     <!-- 网格形式 -->
   <ion-row [hidden]="isShow" >
-    <ion-col *ngFor="let media of medias"><img [src]="media.media_details.sizes.thumbnail.source_url"><p>{{media.title.rendered}}</p></ion-col>
+    <ion-col *ngFor="let media of medias" (click)="selectImgInsertEditor(media)"><img [src]="media.media_details.sizes.thumbnail.source_url"><p>{{media.title.rendered}}</p></ion-col>
   </ion-row>
   <div [hidden]="isShowMutilUploadView">
     <ion-row  >

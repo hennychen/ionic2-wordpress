@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
+import { NavController,ActionSheetController,ViewController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
@@ -61,7 +61,8 @@ export class MediaListPage {
     public platform: Platform,
     public loadingCtrl: LoadingController,
     private wp: WpService,
-    private imagePicker: ImagePicker
+    private imagePicker: ImagePicker,
+    public viewCtrl: ViewController
   ) {
 
     }
@@ -360,6 +361,11 @@ public uploadSingleImage() {
       alert('请登录');
       this.isLoading = false;
     }
+  }
+
+  selectImgInsertEditor(media){
+    console.log(media);
+    this.viewCtrl.dismiss(media.source_url);
   }
 
 }

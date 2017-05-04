@@ -8,12 +8,23 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>PostEditor</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="publishPost()"><ion-icon name="done-all"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <tiny-editor  [elementId]="'my-editor'" (onEditorContentChange)="keyupHandler($event)">test</tiny-editor>
+  <div>
+    
+  </div>
+  <div>
+   <tiny-editor  [elementId]="'myeditor'" [hinsertContentString]="insertImg"  (onEditorContentChange)="keyupHandler($event)" (onInserImage)="showImageList($event)" ></tiny-editor>
+  </div>
 </ion-content>
