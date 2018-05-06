@@ -1,5 +1,8 @@
 {
   "name": "vipho",
   "app_id": "02620f47",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }

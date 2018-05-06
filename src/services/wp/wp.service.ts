@@ -1,8 +1,9 @@
+import { AuthService } from './../auth/auth.service';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
 import {SITE_URL, UtilService} from '../index';
-
+import { RequestOptions, Http, Headers } from '@angular/http';
 @Injectable()
 export class WpService {
 
@@ -15,13 +16,17 @@ export class WpService {
     constructor(
         private authHttp: AuthHttp,
         private util:UtilService,
-        private http: Http
+        private http: Http,
+        private authservice:AuthService
     ) {
     }
     // 获取用户信息
     getCurrentUserProfile() {
         return this.authHttp.get(this.wpApiURL + '/users/me')
-            .map(res => res.json());
+            .map(res => {
+                res.json();
+                console.log(res.json);
+            });
     }
     //注册
     signup(paramsObj) {
@@ -136,5 +141,34 @@ export class WpService {
         }
     }
 
+
+    public postData(paramsObj){
+        console.log(paramsObj);
+        let params = this.util.transformRequest(paramsObj);
+        console.log('sending request');
+        var header = new Headers();
+        let auth = 'Bearer ' + this.authservice.token;
+        header.append('Authorization', auth);
+        header.append('Content-Type', 'application/json');
+        
+          let options = new RequestOptions({ headers: header });
+        this.http.post(this.wpApiURL + '/posts', JSON.stringify(paramsObj), options).map(res => res.json())
+            .subscribe(data => {
+                console.log('http post result==', this.wpApiURL + '/posts', data);
+                
+            }, error => {
+                console.log('error--', error);// Error getting the data
+                
+            });
+        // return this.authHttp.post(this.wpApiURL + '/posts?' + params, JSON.stringify({})).map(
+        //     res => {
+        //         let updatedComment = res.json();
+                
+
+        //         console.log(this.comments);
+        //         return updatedComment;
+        //     }
+        // );
+    }
 
 }

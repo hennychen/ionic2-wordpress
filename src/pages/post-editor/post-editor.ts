@@ -1,3 +1,4 @@
+import { WpService } from './../../services/wp/wp.service';
 import { Component } from '@angular/core';
 import { NavController, NavParams,ModalController } from 'ionic-angular';
 // import { TinyEditorComponent } from '../components/tiny-editor/tiny-editor';
@@ -15,8 +16,10 @@ import { TinyEditorComponent } from '../components/tiny-editor/tiny-editor';
 })
 export class PostEditorPage {
   insertImg:any;
+  title:string='';
+  Content
   public publishContent:any;//发布内容
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {}
+  constructor(public navCtrl: NavController,private wpservice:WpService, public navParams: NavParams, public modalCtrl: ModalController) {}
 
   keyupHandler(event){
     // console.log(event);
@@ -29,6 +32,14 @@ export class PostEditorPage {
   //发布文章
   publishPost(){
 
+    console.log('post');
+    let paramsobj = {
+      title:this.title,
+
+      content: this.publishContent.content ,
+      status: "publish"
+    };
+    this.wpservice.postData(paramsobj);
   }
   //展示素材列表
   showImageList(event){

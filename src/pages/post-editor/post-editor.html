@@ -21,10 +21,16 @@
 
 
 <ion-content padding>
-  <div>
-    
-  </div>
-  <div>
-   <tiny-editor  [elementId]="'myeditor'" [hinsertContentString]="insertImg"  (onEditorContentChange)="keyupHandler($event)" (onInserImage)="showImageList($event)" ></tiny-editor>
-  </div>
+ 
+<ion-list>
+  <ion-item>
+    <ion-label>标题：</ion-label>
+    <ion-input type="text" [(ngModel)]="title" placeholder="请输入标题"></ion-input>
+  </ion-item>
+  
+</ion-list>
+   <ion-list>
+    <tiny-editor  [elementId]="'myeditor'" [hinsertContentString]="insertImg" (onEditorContentChange)="keyupHandler($event)"
+      (onInserImage)="showImageList($event)"></tiny-editor>
+   </ion-list>
 </ion-content>

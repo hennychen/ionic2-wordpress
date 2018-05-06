@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-
+import { BrowserModule } from '@angular/platform-browser';
 import { AuthConfig, AuthHttp } from 'angular2-jwt';
 import { Http } from '@angular/http';
 import { MyApp } from './app.component';
@@ -20,6 +20,7 @@ import { WppagedetailPage } from '../pages/wppagedetail/wppagedetail';
 import { HtmlPipe } from '../pipes/htmlPipe';
 import { MediaListPage } from '../pages/media-list/media-list';
 import { PostEditorPage } from '../pages/post-editor/post-editor';
+import { HttpModule } from '@angular/http';
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
     globalHeaders: [{ 'Accept': 'application/json' }],
@@ -47,6 +48,8 @@ export function getAuthHttp(http) {
     MediaListPage
   ],
   imports: [
+    BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
