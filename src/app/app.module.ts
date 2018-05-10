@@ -21,6 +21,8 @@ import { HtmlPipe } from '../pipes/htmlPipe';
 import { MediaListPage } from '../pages/media-list/media-list';
 import { PostEditorPage } from '../pages/post-editor/post-editor';
 import { HttpModule } from '@angular/http';
+
+import { WpRestApiServiceProvider } from '../providers/wp-rest-api-service/wp-rest-api-service';
 export function getAuthHttp(http) {
   return new AuthHttp(new AuthConfig({
     globalHeaders: [{ 'Accept': 'application/json' }],
@@ -70,7 +72,8 @@ export function getAuthHttp(http) {
     UtilService,
     AuthService,
     WpService,
-    { provide: AuthHttp, useFactory: getAuthHttp, deps: [Http] }
+    { provide: AuthHttp, useFactory: getAuthHttp, deps: [Http] },
+    WpRestApiServiceProvider
   ]
 })
 export class AppModule { }

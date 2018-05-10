@@ -11,7 +11,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>PostEditor</ion-title>
+    <ion-title>文章编辑</ion-title>
     <ion-buttons end>
       <button ion-button (click)="publishPost()"><ion-icon name="done-all"></ion-icon></button>
     </ion-buttons>
@@ -27,7 +27,7 @@
     <ion-label>标题：</ion-label>
     <ion-input type="text" [(ngModel)]="title" placeholder="请输入标题"></ion-input>
   </ion-item>
-  
+
 </ion-list>
    <ion-list>
     <tiny-editor  [elementId]="'myeditor'" [hinsertContentString]="insertImg" (onEditorContentChange)="keyupHandler($event)"

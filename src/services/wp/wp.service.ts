@@ -1,23 +1,26 @@
+import { ToastController } from 'ionic-angular';
+import { Observable } from 'rxjs/Rx';
 import { AuthService } from './../auth/auth.service';
 import { Injectable } from '@angular/core';
 
 import { AuthHttp, JwtHelper } from 'angular2-jwt';
-import {SITE_URL, UtilService} from '../index';
+import { SITE_URL, UtilService } from '../index';
 import { RequestOptions, Http, Headers } from '@angular/http';
 @Injectable()
 export class WpService {
 
     wpApiURL: string = SITE_URL + '/wp-json/wp/v2';
-    wpCustomerApiURL: string = SITE_URL+'/wp-json/customapi/v1'
+    wpCustomerApiURL: string = SITE_URL + '/wp-json/customapi/v1'
     comments: any = [];
-    medias:any = [];
+    medias: any = [];
     jwtHelper: JwtHelper = new JwtHelper();
 
     constructor(
         private authHttp: AuthHttp,
-        private util:UtilService,
+        private util: UtilService,
         private http: Http,
-        private authservice:AuthService
+        private authservice: AuthService,
+        private toast: ToastController
     ) {
     }
     // 获取用户信息
@@ -55,18 +58,18 @@ export class WpService {
 
     // 获取文章分类
     getCategories() {
-      return this.http.get(this.wpApiURL + '/categories').map(data => data.json());
+        return this.http.get(this.wpApiURL + '/categories').map(data => data.json());
     }
     // 修改留言
     userUpdateComment(id, paramsObj) {
         let params = this.util.transformRequest(paramsObj);
         console.log('sending request');
-        return this.authHttp.put(this.wpApiURL + '/comments/'+ id + '?' + params, JSON.stringify({}))
+        return this.authHttp.put(this.wpApiURL + '/comments/' + id + '?' + params, JSON.stringify({}))
             .map(
                 res => {
                     let updatedComment = res.json();
                     //this.comments.push(updatedComment);
-                    for(let i=0; i<this.comments.length; i++) {
+                    for (let i = 0; i < this.comments.length; i++) {
                         if (this.comments[i].id === id) {
                             this.comments[i] = updatedComment;
                             console.log('old', this.comments[i]);
@@ -81,8 +84,8 @@ export class WpService {
     }
     // 获取所有页面
     getPages(paramsObj) {
-      let params = this.util.transformRequest(paramsObj);
-      return this.http.get(this.wpApiURL + '/pages?' + params ).map(data => data.json());
+        let params = this.util.transformRequest(paramsObj);
+        return this.http.get(this.wpApiURL + '/pages?' + params).map(data => data.json());
     }
     // 获取文章数据
     getPosts(paramsObj) {
@@ -92,7 +95,7 @@ export class WpService {
     }
     // 获取文章数据
     getPostDataByID(postsID) {
-      console.log(this.wpApiURL + '/posts/' + postsID);
+        console.log(this.wpApiURL + '/posts/' + postsID);
         return this.http.get(this.wpApiURL + '/posts/' + postsID)
             .map(res => res.json());
     }
@@ -115,34 +118,34 @@ export class WpService {
             });
     }
     //根据用户来获取用户评论
-    getCommentsByUserName(paramsObj){
-      let params = this.util.transformRequest(paramsObj);
-      return this.http.get(this.wpCustomerApiURL + '/getusercomments?' + params)
-          .map(res => {
-              this.comments = res.json();
-              return this.comments;
-          });
+    getCommentsByUserName(paramsObj) {
+        let params = this.util.transformRequest(paramsObj);
+        return this.http.get(this.wpCustomerApiURL + '/getusercomments?' + params)
+            .map(res => {
+                this.comments = res.json();
+                return this.comments;
+            });
     }
-    getMedias(paramsObj){
-      let params = this.util.transformRequest(paramsObj);
-      return this.http.get(this.wpApiURL + '/media?' + params).map(res => {
-          this.medias = res.json();
-          return this.medias;
-      });
+    getMedias(paramsObj) {
+        let params = this.util.transformRequest(paramsObj);
+        return this.http.get(this.wpApiURL + '/media?' + params).map(res => {
+            this.medias = res.json();
+            return this.medias;
+        });
     }
 
     public getCurrentAuthorId(): number {
-        let token:any = localStorage.getItem('id_token');
-        if(token) {
+        let token: any = localStorage.getItem('id_token');
+        if (token) {
             token = this.jwtHelper.decodeToken(token);
             return Number(token.data.user.id);
-        } else{
+        } else {
             return null;
         }
     }
 
 
-    public postData(paramsObj){
+    public postData(paramsObj):Observable<any> {
         console.log(paramsObj);
         let params = this.util.transformRequest(paramsObj);
         console.log('sending request');
@@ -150,25 +153,33 @@ export class WpService {
         let auth = 'Bearer ' + this.authservice.token;
         header.append('Authorization', auth);
         header.append('Content-Type', 'application/json');
-        
-          let options = new RequestOptions({ headers: header });
-        this.http.post(this.wpApiURL + '/posts', JSON.stringify(paramsObj), options).map(res => res.json())
-            .subscribe(data => {
-                console.log('http post result==', this.wpApiURL + '/posts', data);
-                
-            }, error => {
-                console.log('error--', error);// Error getting the data
-                
-            });
-        // return this.authHttp.post(this.wpApiURL + '/posts?' + params, JSON.stringify({})).map(
-        //     res => {
-        //         let updatedComment = res.json();
-                
 
-        //         console.log(this.comments);
-        //         return updatedComment;
-        //     }
-        // );
+        let options = new RequestOptions({ headers: header });
+        return this.http.post(this.wpApiURL + '/posts', JSON.stringify(paramsObj), options).map(res => {res.json()});
+            
+// .subscribe(data => {
+//             console.log('http post result==', this.wpApiURL + '/posts', data);
+//             if (data.message == undefined) {
+//                 this.presentToast('发布成功');
+//             }
+//         }, error => {
+//             console.log('error--', error);// Error getting the data
+//             this.presentToast(error);
+//         });
     }
 
+    /**
+     * 弹出
+     * 
+     * @param {any} msg 
+     * 
+     * @memberOf WpService
+     */
+    presentToast(msg) {
+        let toast = this.toast.create({
+            message: msg,
+            duration: 3000
+        });
+        toast.present();
+    }
 }

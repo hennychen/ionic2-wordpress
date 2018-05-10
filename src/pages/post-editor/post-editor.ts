@@ -39,7 +39,15 @@ export class PostEditorPage {
       content: this.publishContent.content ,
       status: "publish"
     };
-    this.wpservice.postData(paramsobj);
+    this.wpservice.postData(paramsobj).subscribe(data => {
+      
+      if (data.message == undefined) {
+        this.navCtrl.pop();
+      }
+    }, error => {
+      console.log('error--', error);// Error getting the data
+      // this.presentToast(error);
+    });;
   }
   //展示素材列表
   showImageList(event){
