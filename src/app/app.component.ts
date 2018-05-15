@@ -25,10 +25,10 @@ export class MyApp {
     this.pages = [
       { title: '主页', component: Home},
       { title: '个人', component: ProfilePage },
-      { title: '发布文章',component: PostEditorPage },
+      // { title: '发布文章',component: PostEditorPage },
       { title: '分类', component: CategoryPage },
       { title: '页面', component: WppagePage },
-      { title: '素材', component: MediaListPage }
+      // { title: '素材', component: MediaListPage }
     ];
 
   }

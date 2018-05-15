@@ -23,6 +23,6 @@
       
 </form>
 
-<p *ngIf="!showPanel() && auth.authenticated()" (click)="isEditing = true;" style="text-align: center;">Add Comment</p>
+<p *ngIf="!showPanel() && auth.authenticated()" (click)="isEditing = true;" style="text-align: center;">评论</p>
 
-<p *ngIf="!auth.authenticated()" (click)="commentFormNotAuthClicked()" style="text-align: center;">Add Comment (login required)</p>
+<p *ngIf="!auth.authenticated()" (click)="commentFormNotAuthClicked()" style="text-align: center;">评论 (必须登录)</p>

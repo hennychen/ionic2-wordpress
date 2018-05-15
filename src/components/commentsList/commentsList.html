@@ -1,4 +1,4 @@
-<h3 style="margin-top: 2em;">Comments</h3>
+<h3 style="margin-top: 2em;">评论</h3>
 <div *ngIf="comments.length > 0">
     <ion-card *ngFor="let comment of comments">
     <ion-item>
@@ -18,8 +18,8 @@
   <ion-row>
     <ion-col right text-right *ngIf="canDeleteComment(comment.author)">
       <ion-note>
-        <span (click)="editComment(comment)"><a>Edit</a></span> | 
-        <span (click)="deleteComment(comment)"><a>Delete</a></span>
+        <span (click)="editComment(comment)"><a>编辑</a></span> | 
+        <span (click)="deleteComment(comment)"><a>删除</a></span>
       </ion-note>
     </ion-col>
   </ion-row>

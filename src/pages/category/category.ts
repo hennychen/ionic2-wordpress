@@ -13,7 +13,7 @@ import { Home } from '../home/home';
   templateUrl: 'category.html'
 })
 export class CategoryPage {
-  private list:any;
+ list:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private wp: WpService) {
     this.wp.getCategories().subscribe(data => {

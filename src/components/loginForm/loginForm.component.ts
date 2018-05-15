@@ -22,17 +22,17 @@ export class LoginFormComponent {
                 result => {
                     if (result === true) {
                         // login successful
-                        this.loginStatusMessage = 'Login successful!';
+                        this.loginStatusMessage = '登录成功!';
                     } else {
                         // login failed - token issue
-                        this.loginStatusMessage = 'Something wrong with token.';
+                        this.loginStatusMessage = '唯一标示错误';
                     }
                     this.isLoading = false;
                 },
                 result => {
                     //rest call error
                     this.isLoading = false;
-                    this.loginStatusMessage = 'Username or password is incorrect';
+                    this.loginStatusMessage = '用户名或密码错误请检查！';
                 }
             );
         return false;

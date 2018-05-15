@@ -1,7 +1,7 @@
     <form name="loginForm" #loginForm="ngForm" novalidate>
       <ion-list>
         <ion-item>
-          <ion-label floating>Username</ion-label>
+          <ion-label floating>用户名</ion-label>
           <ion-input
             [(ngModel)]="loginModel.username"
             #username="ngModel"
@@ -12,7 +12,7 @@
           </ion-input>
         </ion-item>
         <ion-item>
-          <ion-label floating>Password</ion-label>
+          <ion-label floating>密码</ion-label>
           <ion-input
             [(ngModel)]="loginModel.password"
             #password="ngModel"
@@ -25,11 +25,11 @@
       </ion-list>
 
       <ion-spinner name="bubbles" *ngIf="isLoading"></ion-spinner>
-      <div *ngIf="!username.valid && (username.dirty || username.touched)" class="alert alert-danger padding">Username is required</div>
-      <div *ngIf="!password.valid && (password.dirty || password.touched)" class="alert alert-danger padding">Password is required</div>
+      <div *ngIf="!username.valid && (username.dirty || username.touched)" class="alert alert-danger padding">请输入用户名</div>
+      <div *ngIf="!password.valid && (password.dirty || password.touched)" class="alert alert-danger padding">请输入密码</div>
 
       <div class="padding">{{loginStatusMessage}}</div>
-      <button ion-button block (click)="login()" [disabled]="!loginForm.valid || isLoading">Login</button>
+      <button ion-button block (click)="login()" [disabled]="!loginForm.valid || isLoading">登录</button>
 
 
     </form>

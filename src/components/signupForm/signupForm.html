@@ -1,12 +1,12 @@
 
   <div class="padding">
-      become a member
+      注册新用户
   </div>
 
     <form name="signupForm" #signupForm="ngForm" novalidate>
       <ion-list>
         <ion-item>
-          <ion-label floating>Username</ion-label>
+          <ion-label floating>用户名</ion-label>
           <ion-input
             [(ngModel)]="signupModel.username"
             #username="ngModel"
@@ -18,7 +18,7 @@
         </ion-item>
 
         <ion-item>
-          <ion-label floating>Email</ion-label>
+          <ion-label floating>邮箱</ion-label>
           <ion-input
             [(ngModel)]="signupModel.email"
             #email="ngModel"
@@ -30,7 +30,7 @@
         </ion-item>
 
         <ion-item>
-          <ion-label floating>Password</ion-label>
+          <ion-label floating>密码</ion-label>
           <ion-input
             [(ngModel)]="signupModel.pwd"
             #password="ngModel"
@@ -43,11 +43,11 @@
       </ion-list>
 
       <ion-spinner name="bubbles" *ngIf="isLoading"></ion-spinner>
-      <div *ngIf="!username.valid && (username.dirty || username.touched)" class="alert alert-danger padding">Username is required</div>
-      <div *ngIf="!password.valid && (password.dirty || password.touched)" class="alert alert-danger padding">Password is required</div>
+      <div *ngIf="!username.valid && (username.dirty || username.touched)" class="alert alert-danger padding">请输入用户名</div>
+      <div *ngIf="!password.valid && (password.dirty || password.touched)" class="alert alert-danger padding">请输入密码</div>
 
       <div class="padding">{{signupStatusMessage}}</div>
-      <button ion-button block (click)="signup()" [disabled]="!signupForm.valid || isLoading">Login</button>
+      <button ion-button block (click)="signup()" [disabled]="!signupForm.valid || isLoading">登录</button>
 
 
     </form>

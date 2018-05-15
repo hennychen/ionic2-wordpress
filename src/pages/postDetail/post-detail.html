@@ -19,11 +19,11 @@
       <button ion-button full>{{selectedPost.deal_details_code}}</button>
     </div>
 
-    <div *ngIf="selectedPost.deal_details_type !== 'coupon_code'">
+    <!-- <div *ngIf="selectedPost.deal_details_type !== 'coupon_code'">
       <button ion-button full>Get the deal now!</button>
-    </div>
+    </div> -->
 
-    <div style="margin-top: 20px">Expire: {{selectedPost.deal_details_expirydate}}</div>
+    <!-- <div style="margin-top: 20px">Expire: {{selectedPost.deal_details_expirydate}}</div> -->
 
 
  <comments-list [postId]="selectedPost.id" (editCommentChanged)="editCommentChanged($event)"></comments-list>
@@ -31,7 +31,7 @@
 
 
  </div>
- <ion-fab right bottom>
+ <!-- <ion-fab right bottom>
    <button ion-fab color="dark"><ion-icon name="arrow-dropup"></ion-icon></button>
        <ion-fab-list side="top">
          <button ion-fab (click)="shareByEmail()"><ion-icon name="mail"></ion-icon></button>
@@ -39,7 +39,7 @@
          <button ion-fab (click)="shareWxTimeLine()"><ion-icon>朋友圈</ion-icon></button>
          <button ion-fab (click)="shareWxSession()"><ion-icon>微信</ion-icon></button>
        </ion-fab-list>
-   </ion-fab>
+   </ion-fab> -->
 
 </ion-content>
 

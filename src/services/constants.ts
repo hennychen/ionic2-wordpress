@@ -1,1 +1,1 @@
-export const SITE_URL:string = "http://vipho.cn";
+export const SITE_URL: string = "http://zixun.xueqiufund.com";

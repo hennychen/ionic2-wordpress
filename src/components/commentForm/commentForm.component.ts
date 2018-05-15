@@ -19,9 +19,9 @@ export class CommentFormComponent {
     statusMessage = '';
 
     isEditing: boolean = false;
+    
 
-
-    constructor(private wp:WpService, private auth: AuthService, private nav:
+    constructor(private wp:WpService, public auth: AuthService, private nav:
             NavController) {
     }
 

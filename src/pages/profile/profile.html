@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Profile</ion-title>
+    <ion-title>个人中心</ion-title>
     <ion-buttons end>
       <button (click)="register()" ion-button icon-only>
         <ion-icon [name]="iconname" ></ion-icon>
@@ -25,14 +25,14 @@
   <div *ngIf="!auth.authenticated()">
     <login-form [hidden]="!hideSignUpView"></login-form>
     <signup-form [hidden]="hideSignUpView" ></signup-form>
-    <div>Don't have an account yet? please go to <a href="http://vipho.cn/wp-login.php?action=register" target="_blank">Sumsy.com</a> to <a (click)="register()">{{registerString}}</a>.</div>
+    <!-- <div>Don't have an account yet? please go to <a href="http://vipho.cn/wp-login.php?action=register" target="_blank">Sumsy.com</a> to <a (click)="register()">{{registerString}}</a>.</div> -->
   </div>
 
   <div *ngIf="auth.authenticated()">
     <ion-card>
 
       <ion-item *ngIf="auth.user">
-        <p>you have logged in.</p>
+        <p>你已登录.</p>
         <h2>{{ auth.user.user_display_name }}</h2>
         <p>{{ auth.user.user_email }}</p>
       </ion-item>
